@@ -2,11 +2,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const html = String.raw;
 import browserEnv from "browser-env";
-import { FrameActionDataParsed } from "frames.js";
-let ctx;
-let canv;
 let data: string;
-let HTMLCanvasElement;
 
 // Create a virtual DOM environment
 const dom = new JSDOM("<!DOCTYPE html>");
@@ -21,24 +17,25 @@ const p5 = require("p5");
 // Your p5.js sketch
 const sketch = (p) => {
   p.setup = () => {
-    canv = p.createCanvas(400, 200);
+    p.createCanvas(400, 200);
     p.background(220);
-    ctx = canv.drawingContext;
   };
 
   p.draw = () => {
     p.fill(255, 0, 0);
     p.ellipse(50, 100, 50, 50);
-    data = p.ctx.toDataURL();
+    data = p.canvas.toDataURL();
   };
 };
 
 // Create a new p5 instance
-// new p5(sketch);
-dom.window.document.addEventListener("DOMContentLoaded", () => {
-  new p5(sketch);
-});
+new p5(sketch);
 
+// Access the canvas data URL
+// const canvasDataURL = p.canvas.toDataURL();
+// console.log("Canvas Data URL:", canvasDataURL);
+
+// Create a new p5 instance
 console.log(data);
 export default {
   name: "test",

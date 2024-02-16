@@ -6,15 +6,11 @@ export default async (req) => {
     try {
         const requestURL = new URL(req.url);
         const payload = await parseRequest(req);
-        const frameMessage = payload ? await getFrameMessage(payload, {
-            hubHttpUrl: process.env.FARCASTER_HUB
-        }) : {} as FrameActionDataParsed;
-
+        const frameMessage = payload ? await getFrameMessage(payload) : {} as FrameActionDataParsed;
         const frameContext = {
             searchParams: requestURL.searchParams,
             requestURL: payload?.untrustedData.url,
         }
-        
         return await processFrameRequest(frameContext, frameMessage);
     } catch (error) {
         console.error(`Error processing request: ${error}`);

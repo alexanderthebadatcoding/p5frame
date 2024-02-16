@@ -18,7 +18,7 @@ import htmlToSimpleFrame from "./htmlToSimpleFrame.js";
  * @returns A promise that resolves to the response for displaying the next frame.
  */
 export default async (frameContext, frameMessage: FrameActionDataParsed) => {
-  let nextFrameName = "test";
+  let nextFrameName = "art";
   const prevFrame = frames[frameContext.searchParams?.get("frame")];
 
   if (prevFrame && typeof prevFrame.logic === "function") {

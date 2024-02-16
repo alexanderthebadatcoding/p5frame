@@ -1,6 +1,6 @@
 import { FrameActionDataParsed } from "frames.js";
 import { readFile } from "fs/promises";
-import puppeteer from "puppeteer-core";
+// import puppeteer from "puppeteer-core";
 import chromium from "netlify-plugin-chromium";
 const html = String.raw;
 

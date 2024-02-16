@@ -1,18 +1,16 @@
-// import jsdom from "jsdom";
-import { JSDOM } from "jsdom";
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 const html = String.raw;
 
 // Create a virtual DOM environment
-const window = new JSDOM("<!DOCTYPE html>").window;
-global.window = window;
+const dom = new JSDOM("<!DOCTYPE html>");
+global.window = dom.window;
+global.document = window.document;
 global.screen = window.screen;
 global.navigator = window.navigator;
-// global.Image = window.Image;
-// global.Node = window.Node;
 
 // Import p5.js
-import P5 from "p5";
-// import "p5/lib/addons/p5.dom";
+const p5 = require("p5");
 
 // Your p5.js sketch
 const sketch = (p) => {
@@ -25,15 +23,13 @@ const sketch = (p) => {
   p.draw = () => {
     p.fill(255, 0, 0);
     p.ellipse(50, 100, 50, 50);
-    p.canvas.toDataURL();
+    const data = p.canvas.toDataURL();
     console.log(data);
   };
 };
 
 // Create a new p5 instance
-new P5(sketch);
-
-// Export the canvasDataURL in the desired format
+new p5(sketch);
 
 export default {
   name: "poster",

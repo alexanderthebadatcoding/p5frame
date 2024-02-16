@@ -1,7 +1,7 @@
 import { FrameActionDataParsed } from "frames.js";
 import { readFile } from "fs/promises";
 import puppeteer from "puppeteer-core";
-import chromium from "chrome-aws-lambda";
+import chromium from "netlify-plugin-chromium";
 const html = String.raw;
 
 export default {

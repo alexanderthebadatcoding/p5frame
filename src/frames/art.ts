@@ -1,6 +1,7 @@
 import { FrameActionDataParsed } from "frames.js";
 import { readFile } from "fs/promises";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "chrome-aws-lambda";
 const html = String.raw;
 
 export default {
@@ -15,8 +16,11 @@ export default {
   },
   content: async () => {
     // Launch a browser instance
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"], // Recommended args for running in serverless environments
+    const browser = await chromium.puppeteer.launch({
+      executablePath: await chromium.executablePath,
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      headless: chromium.headless,
     });
     const page = await browser.newPage();
     // Set the browser window size

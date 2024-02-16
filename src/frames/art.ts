@@ -1,54 +1,82 @@
-import { JSDOM } from "jsdom";
-import p5 from "p5";
-// import { FrameActionDataParsed } from "frames.js";
+import { FrameActionDataParsed } from 'frames.js';
+import { readFile } from 'fs/promises';
+import puppeteer from 'puppeteer';
 const html = String.raw;
-let data: string;
 
-// Create a virtual DOM environment
-const dom = new JSDOM("<!DOCTYPE html>");
-const window = dom.window;
-
-// Assign global objects for compatibility
-global.window = window as unknown as Window & typeof globalThis;
-global.screen = window.screen;
-global.navigator = window.navigator;
-global.document = window.document;
-// global.canvas = window.canvas;
-
-// Your p5.js sketch
-const sketch = (p: p5) => {
-  p.setup = () => {
-    // Create a canvas but don't attach it to the document
-    p.createCanvas(400, 200);
-    p.background(220);
-    // If you want to access the canvas context, use drawingContext
-    const canvasContext = p.drawingContext as CanvasRenderingContext2D;
-    // Now you can use canvasContext to perform low-level canvas operations
-  };
-
-  p.draw = () => {
-    // Your drawing logic goes here
-    p.fill(255, 0, 0);
-    p.ellipse(50, 100, 50, 50);
-
-    // If you want to get data from the canvas
-    const data = p.canvas.toDataURL();
-    console.log(data);
-  };
-};
-
-// Create a new p5 instance
-new p5(sketch);
-
-// Create a new p5 instance
-console.log(data);
 export default {
-  name: "art",
-  content: () => html`
-    <frame-image src="${data}" />
-    <frame-button> 🔳 Try Demo </frame-button>
-    <frame-button action="link" target="${process.env.STOLEN_REDIRECT_URL}">
-      👩‍🎤 View original cast
-    </frame-button>
-  `,
+  name: 'art',
+  logic: async (frameMessage: FrameActionDataParsed) => {
+    switch (frameMessage.buttonIndex) {
+      case 2:
+        return `credits`;
+      default: 
+        return `art`;
+    }
+  },
+  content: async () => {
+
+    // Launch a browser instance
+    const browser = await puppeteer.launch({
+        args: ['--no-sandbox', '--disable-setuid-sandbox'], // Recommended args for running in serverless environments
+    });
+    const page = await browser.newPage();
+    // Set the browser window size
+    await page.setViewport({
+      width: 1200,
+      height: 630
+    });
+
+    // Define your p5.js sketch HTML without using import statement
+    const p5SketchHTML = html`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+      </head>
+      <body>
+        <script>
+          ${await readFile('./public/scripts/p5.min.js', 'utf8')}
+          function setup() {
+            createCanvas(1200, 630);
+            background(Math.random()*255,Math.random()*255,Math.random()*255);
+            fill(Math.random()*255, Math.random()*255, Math.random()*255);
+            ellipse(Math.random()*1200, Math.random()*630, Math.random()*630, Math.random()*630);
+          }
+
+          // Automatically call setup() and other p5 functions
+          window.onload = function() {
+            new p5();
+          };
+        </script>
+      </body>
+    </html>
+    `;
+
+    // Set the page content to your p5.js sketch HTML
+    await page.setContent(p5SketchHTML);
+    const renderDelay = 250 // in ms, how long you want to wait before caputring the screenshot
+    await new Promise(resolve => setTimeout(resolve, renderDelay)); // Wait a bit for the sketch to render
+
+    // Take a screenshot of the page
+    const imageBuffer = await page.screenshot({ type: 'png' });
+    await browser.close();
+    const dataURL = imageBuffer.toString('base64url');
+
+    return html`
+      <frame-image src="data:image/png;base64,${dataURL}"></frame-image>
+      <frame-button>
+        Show another
+      </frame-button>
+      <frame-button>
+        🎬 View credits
+      </frame-button>
+    `;
+  },
 };

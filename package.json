@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.8.4",
   "dependencies": {
+    "@canvas/image": "^2.0.0",
     "@netlify/blobs": "^6.4.2",
     "@netlify/functions": "^2.6.0",
     "browser-env": "^3.3.0",

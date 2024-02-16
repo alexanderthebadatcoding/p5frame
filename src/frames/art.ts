@@ -32,7 +32,7 @@ const sketch = (p: p5) => {
     p.ellipse(50, 100, 50, 50);
 
     // If you want to get data from the canvas
-    const data = p.canvas.toDataURL();
+    data = p.canvas.toDataURL();
     console.log(data);
   };
 };

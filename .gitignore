@@ -15,6 +15,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 *.js
+!p5.min.js
 
 # sharp issue: https://sharp.pixelplumbing.com/install#cross-platform
 package-lock.json 

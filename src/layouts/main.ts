@@ -6,7 +6,6 @@ export default (frameHTML: string, frameMessage: FrameActionDataParsed) => {
     <!doctype html>
     <html>
       <head>
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
         <style>
           @font-face {
             font-family: "Redaction";

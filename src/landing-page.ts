@@ -37,7 +37,6 @@ export default async (frameContent) => {
         border: 4px inset var(--text);
       }
     </style>
-    
   `;
   const body = html`
     <h1>🔳 The Simplest Frame</h1>

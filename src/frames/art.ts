@@ -1,6 +1,6 @@
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+import { JSDOM } from "jsdom";
 const html = String.raw;
+let data;
 
 // Create a virtual DOM environment
 const dom = new JSDOM("<!DOCTYPE html>");
@@ -10,7 +10,7 @@ global.screen = window.screen;
 global.navigator = window.navigator;
 
 // Import p5.js
-const p5 = require("p5");
+import * as p5 from "../data/p5.js";
 
 // Your p5.js sketch
 const sketch = (p) => {
@@ -23,7 +23,7 @@ const sketch = (p) => {
   p.draw = () => {
     p.fill(255, 0, 0);
     p.ellipse(50, 100, 50, 50);
-    const data = p.canvas.toDataURL();
+    data = p.canvas.toDataURL();
     console.log(data);
   };
 };
@@ -40,6 +40,5 @@ export default {
     <frame-button action="link" target="${process.env.STOLEN_REDIRECT_URL}">
       👩‍🎤 View original cast
     </frame-button>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
   `,
 };

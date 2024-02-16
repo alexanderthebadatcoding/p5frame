@@ -11,7 +11,7 @@ export default {
     content: () => html`
         <frame-image src="/images/poster-animated.gif" />
         <frame-button>
-            🔳 Try Demo
+           Art
         </frame-button>
         <frame-button action="link" target="https://github.com/depatchedmode/simplest-frame">
             {😺} View on Github

@@ -37,7 +37,7 @@ export default async (frameContent) => {
         border: 4px inset var(--text);
       }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    
   `;
   const body = html`
     <h1>🔳 The Simplest Frame</h1>

@@ -9,7 +9,7 @@ export default {
         }
     },
     content: () => html`
-        <frame-image src="/images/poster-animated.gif" />
+        <frame-image src="/sketch" />
         <frame-button>
            Art
         </frame-button>

@@ -12,11 +12,11 @@ export default {
     }
   },
   content: async () => html`
-    <frame-image src="/sketch"></frame-image>
+    <frame-image src="sketch"></frame-image>
     <frame-button>
       Show another
     </frame-button>
-    <frame-button>
+  <frame-button>
       🎬 View credits
     </frame-button>
   `,

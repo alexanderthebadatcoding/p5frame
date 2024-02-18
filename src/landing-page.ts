@@ -39,7 +39,7 @@ export default async (frameContent) => {
     </style>
   `;
   const body = html`
-    <h1>🔳 The Simplest Frame</h1>
+    <h1>🔳 The Simplest p5 Frame</h1>
     <figure>
       <img width="600" src="${frameContent.image}" />
     </figure>

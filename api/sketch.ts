@@ -1,6 +1,5 @@
 import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
-
 export default async (req, context) => {
 
   try {
@@ -22,10 +21,8 @@ export default async (req, context) => {
 
     const browser = await puppeteer.launch(options);
     const page = await browser.newPage();
-    const host = process.env.context === 'production' ? process.env.URL : `http://${req.headers.get('host')}`;
+    const host = process.env.BASE_URL || process.env.URL;
     const scriptURL = `${host}/scripts/p5.min.js`;
-
-    // Adjust the path to p5.min.js as necessary for your project structure.
     const response = await fetch(scriptURL);
     const p5Script = await response.text();
 

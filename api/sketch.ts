@@ -46,7 +46,6 @@ export default async (req, context) => {
             let cols;
             let rows;
             let size;
-            // let colors;
             let vexArc;
             let numShapes;
             let img;
@@ -54,13 +53,6 @@ export default async (req, context) => {
             let numColors = 5;
             let baseColor;
             let complementaryColor;
-
-            function preload() {
-              // Load your image
-              img = loadImage(
-                "https://res.cloudinary.com/merkle-manufactory/image/fetch/c_fill,f_jpg,w_144/https%3A%2F%2Fi.imgur.com%2FcwUW3lt.jpg"
-              );
-            }
 
             class Tile {
               constructor(x, y, type, c) {
@@ -130,11 +122,9 @@ export default async (req, context) => {
 
               size = floor(random(30, 60));
               createCanvas(1200, 630);
-              // Get the colors from the image
-              getColorsFromImage(img);
+              colors = ["#0a1045", "#00c2d1", "#f9e900", "#f6af65", "#ed33b9"];
               baseColor = colors[floor(random(5))];
               complementaryColor = getComplementaryColor(baseColor);
-              // colors = ["#0a1045", "#00c2d1", "#f9e900", "#f6af65", "#ed33b9"];
 
               cols = width / size;
               rows = height / size;
@@ -161,39 +151,6 @@ export default async (req, context) => {
               noLoop();
             }
 
-            function getColorsFromImage(img) {
-              img.loadPixels();
-              colors = [];
-
-              while (colors.length < numColors) {
-                let x = int(random(img.width));
-                let y = int(random(img.height));
-
-                // Get the color at the random position
-                let index = (y * img.width + x) * 4;
-                let r = img.pixels[index];
-                let g = img.pixels[index + 1];
-                let b = img.pixels[index + 2];
-
-                // Convert RGB to hex
-                let colorHex = rgbToHex(r, g, b);
-
-                // Check for duplicate color
-                if (!colors.includes(colorHex)) {
-                  colors.push(colorHex);
-                  // print(colorHex);
-                }
-              }
-            }
-
-            function rgbToHex(r, g, b) {
-              return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-            }
-
-            function componentToHex(c) {
-              let hex = c.toString(16);
-              return hex.length == 1 ? "0" + hex : hex;
-            }
 
             function getComplementaryColor(baseColor) {
               let r = red(baseColor);
@@ -212,7 +169,6 @@ export default async (req, context) => {
 
               return color(compR, compG, compB);
             }
-
             window.onload = function() {
               new p5();
             };

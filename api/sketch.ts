@@ -61,7 +61,6 @@ export default async (req, context) => {
                 this.type = type;
                 this.c = c;
               }
-
               display() {
                 push();
                 translate(this.x, this.y);
@@ -169,9 +168,6 @@ export default async (req, context) => {
 
               return color(compR, compG, compB);
             }
-            window.onload = function() {
-              new p5();
-            };
           </script>
         </body>
       </html>

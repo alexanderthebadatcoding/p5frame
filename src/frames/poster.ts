@@ -13,9 +13,9 @@ export default {
     <frame-button>Art</frame-button>
     <frame-button
       action="link"
-      target="https://github.com/depatchedmode/simplest-frame"
+      target="https://github.com/alexanderthebadatcoding/p5frame"
     >
-      {😺} View on Github
+      View on Github
     </frame-button>
   `,
 };

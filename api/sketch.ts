@@ -50,7 +50,106 @@ export default async (req, context) => {
             let vexArc;
             let numShapes;
             let img;
-            let colors = [];
+            let colors = [
+              "#384726",
+              "#b44317",
+              "#fafeff",
+              "#56472a",
+              "#030712",
+              "#f9a84d",
+              "#71894d",
+              "#d28f58",
+              "#190b00",
+              "#131218",
+              "#b8a77b",
+              "#0d0d0d",
+              "#371e1a",
+              "#19181e",
+              "#131313",
+              "#7e301c",
+              "#c297cd",
+              "#2a3517",
+              "#ded6b1",
+              "#91b748",
+              "#070707",
+              "#223610",
+              "#010100",
+              "#fe7644",
+              "#151f07",
+              "#17273e",
+              "#e3d4a9",
+              "#546b33",
+              "#241c2b",
+              "#62714a",
+              "#d4caaf",
+              "#d48777",
+              "#585340",
+              "#799447",
+              "#1a1921",
+              "#0c1922",
+              "#fef4b7",
+              "#a0cb6f",
+              "#7d8286",
+              "#dc6940",
+              "#1b3244",
+              "#eacfa2",
+              "#1d3b53",
+              "#324a56",
+              "#1e2015",
+              "#13111f",
+              "#264557",
+              "#9ecf71",
+              "#0f1f36",
+              "#2a331e",
+              "#57602b",
+              "#fae1dd",
+              "#17161c",
+              "#e88e54",
+              "#f0a64f",
+              "#192f47",
+              "#2a213c",
+              "#fdfeff",
+              "#0c0b06",
+              "#8b9a9f",
+              "#bcb17b",
+              "#a0668e",
+              "#1f2312",
+              "#50696e",
+              "#7ac1b7",
+              "#f9d7b1",
+              "#030a02",
+              "#24231f",
+              "#edb294",
+              "#475556",
+              "#786334",
+              "#233543",
+              "#080607",
+              "#accf51",
+              "#f28c54",
+              "#f1d6cb",
+              "#5e9f67",
+              "#2d2d2d",
+              "#6a5d31",
+              "#9a3920",
+              "#232615",
+              "#b1a26b",
+              "#cb4a3d",
+              "#ee7e4e",
+              "#82c693",
+              "#376889",
+              "#cdc4a5",
+              "#fc9330",
+              "#254456",
+              "#fa9135",
+              "#463d1c",
+              "#6ab1ab",
+              "#fce1b4",
+              "#f1aa2e",
+              "#434c1f",
+              "#f2ebbd",
+              "#eeb484",
+              "#3a2812",
+            ];
             let numColors = 5;
             let baseColor;
             let complementaryColor;
@@ -121,7 +220,6 @@ export default async (req, context) => {
 
               size = floor(random(30, 60));
               createCanvas(1200, 630);
-              colors = ["#0a1045", "#00c2d1", "#f9e900", "#f6af65", "#ed33b9"];
               baseColor = colors[floor(random(5))];
               complementaryColor = getComplementaryColor(baseColor);
 
@@ -141,6 +239,7 @@ export default async (req, context) => {
             }
 
             function draw() {
+              shuffle(colors, true);
               background(complementaryColor);
               for (let i = 0; i < cols; i++) {
                 for (let j = 0; j < rows; j++) {

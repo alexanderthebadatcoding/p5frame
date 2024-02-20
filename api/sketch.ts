@@ -165,9 +165,11 @@ export default async (req, context) => {
                 push();
                 translate(this.x, this.y);
                 if (vexArc == 1) {
+                  strokeCap(SQUARE);
                   stroke(this.c);
                   noFill();
-                  strokeWeight(5);
+                  // strokeWeight(5);
+                  strokeWeight(max(1, size / 2.69));
                   if (this.type == 0) {
                     arc(0, 0, size, size, 0, 90);
                     arc(size, size, size, size, 180, 270);
@@ -209,6 +211,7 @@ export default async (req, context) => {
             }
 
             function setup() {
+              shuffle(colors, true);
               vexArc = floor(random(2));
               if (vexArc == 1) {
                 numShapes = 2;
@@ -220,7 +223,7 @@ export default async (req, context) => {
 
               size = floor(random(30, 60));
               createCanvas(1200, 630);
-              baseColor = colors[floor(random(5))];
+              baseColor = colors[floor(random(15))];
               complementaryColor = getComplementaryColor(baseColor);
 
               cols = width / size;
@@ -232,7 +235,7 @@ export default async (req, context) => {
                     i * size,
                     j * size,
                     floor(random(numShapes)),
-                    colors[floor(random(5))]
+                    colors[floor(random(15))]
                   );
                 }
               }

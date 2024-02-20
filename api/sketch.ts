@@ -42,6 +42,7 @@ export default async (req, context) => {
         </head>
         <body>
           <script>
+            let frameMode = false;
             let tiles = [];
             let cols;
             let rows;
@@ -170,6 +171,24 @@ export default async (req, context) => {
             window.onload = function() {
               redraw();
             };
+            function checkFrameMode() {
+            // Check if the URL contains the "frame" parameter
+            let params = getURLParams();
+            if (params.frame === "art") {
+              frameMode = true;
+              redraw(); // Redraw the canvas if in "art" mode
+              }
+            }
+            
+            // Check if the URL parameters should trigger a redraw
+            function mousePressed() {
+              redraw();
+            }
+
+            // Optionally, you can continuously check the URL for changes
+            function keyPressed() {
+              redraw();
+            }
           </script>
         </body>
       </html>

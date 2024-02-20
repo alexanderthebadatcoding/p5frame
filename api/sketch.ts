@@ -109,7 +109,6 @@ export default async (req, context) => {
             }
 
             function setup() {
-              // randomSeed(1738);
               vexArc = floor(random(2));
               if (vexArc == 1) {
                 numShapes = 2;
@@ -168,6 +167,9 @@ export default async (req, context) => {
 
               return color(compR, compG, compB);
             }
+            window.onload = function() {
+              redraw();
+            };
           </script>
         </body>
       </html>

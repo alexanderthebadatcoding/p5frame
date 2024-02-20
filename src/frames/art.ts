@@ -12,7 +12,7 @@ export default {
     }
   },
   content: async () => html`
-    <frame-image src="sketch"></frame-image>
+    <frame-image src="sketch?t=${new Date()}"></frame-image>
     <frame-button>
       Show another
     </frame-button>
